@@ -6,11 +6,42 @@
   <title>Three.js Visualizations</title>
 </head>
 <body>
+  <div class="scene-manager-ui">
+    <h1>Scenes</h1>
+    <ul class="scene-list">
+      <li><button onclick="loadScene('scene1')">Scene 1</button></li>
+      <li><button onclick="loadScene('scene2')">Scene 2</button></li>
+    </ul>
+  </div>
   <script type="module" src="./src/main.js"></script>
 </body>
 <style>
     * {
         margin: 0;
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    }
+
+    .scene-manager-ui {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction:  column;
+      height: 200px;
+      width: 300px;
+      background-color: rgba(255, 255, 255, 0.445); /* Optional: semi-transparent background */
+      border: 1px solid #ffffff; /* Optional: border for better visibility */
+      padding: 10px; /* Optional: padding for inner spacing */
+    }
+
+    .scene-manager-ui h1 {
+      font-size: 1em;
+    }
+
+    .scene-list {
+      margin: 5px 0px 0px 0px;
+      padding: 0px;
+      list-style: none;
     }
 </style>
 </html>
