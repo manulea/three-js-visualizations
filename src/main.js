@@ -1,28 +1,11 @@
 import * as THREE from 'three';
 import SceneManager from './scene-manager.js';
 
+import { createScene1 } from './scenes/scene1.js';
+import { createScene2 } from './scenes/scene2.js';
+
 
 const sceneManager = new SceneManager();
-
-function createScene1() {
-  const scene = new THREE.Scene();
-  const geometry = new THREE.BoxGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
-  cube.name = "cube"
-  scene.add(cube);
-  console.log('Cube created and added to scene1:', cube); // Debugging
-  return scene;
-}
-
-function createScene2() {
-  const scene = new THREE.Scene();
-  const geometry = new THREE.SphereGeometry();
-  const material = new THREE.MeshBasicMaterial({ color: 0xff0000 });
-  const sphere = new THREE.Mesh(geometry, material);
-  scene.add(sphere);
-  return scene;
-}
 
 function findObjectByName(scene, name) {
   return scene.children.find(child => child.name === name);
@@ -50,13 +33,8 @@ function init() {
     const currentScene = sceneManager.getCurrentScene();
     // If current scene is not null
     if (currentScene) {
-      // Animations for scene 1
-      if (currentScene === sceneManager.scenes['scene1']) {
-        // Find the cube
-        let cube = findObjectByName(currentScene, 'cube')
-        cube.rotation.x += 0.01;
-        cube.rotation.y += 0.01;
-        // console.log('Cube rotation:', cube.rotation); // Debugging
+      if (typeof currentScene.animate === 'function') {
+        currentScene.animate();
       }
       renderer.render(currentScene, camera);
     }
@@ -73,11 +51,11 @@ function init() {
   });
 }
 
+// Global function to load scene frome scene manager
 window.loadScene = (sceneName) => {
   sceneManager.loadScene(sceneName);
   console.log(sceneName + ' loaded')
   console.log(sceneManager.getCurrentScene())
-
 };
 
 // Initalize
