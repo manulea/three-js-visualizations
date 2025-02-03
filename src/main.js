@@ -3,6 +3,7 @@ import SceneManager from './scene-manager.js';
 
 import { createScene1 } from './scenes/scene1.js';
 import { createScene2 } from './scenes/scene2.js';
+import { createScene3 } from './scenes/scene3.js';
 
 
 const sceneManager = new SceneManager();
@@ -22,6 +23,7 @@ function init() {
   // Create scenes and add to scene manager
   sceneManager.addScene('scene1', createScene1());
   sceneManager.addScene('scene2', createScene2());
+  sceneManager.addScene('scene3', createScene3());
   // Load scene 1
   sceneManager.loadScene('scene1');
 
