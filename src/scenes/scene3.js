@@ -2,6 +2,11 @@ import * as THREE from 'three'
 
 export function createScene3() {
     const scene = new THREE.Scene();
+
+     // Create a camera specific to this scene
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
     scene.background = new THREE.Color(0x1a1a2e); // Dark blueish background
     scene.fog = new THREE.Fog(0x1a1a2e, 10, 50); // Color, near, far
 
@@ -68,6 +73,6 @@ export function createScene3() {
         }
       };
 
-      return scene;
+      return { scene, camera, animate: scene.animate };
 
 }

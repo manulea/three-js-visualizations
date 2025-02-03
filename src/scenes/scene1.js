@@ -2,6 +2,11 @@ import * as THREE from 'three';
 
 export function createScene1() {
     const scene = new THREE.Scene();
+
+     // Create a camera specific to this scene
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
     const geometry = new THREE.BoxGeometry();
     const material = new THREE.MeshStandardMaterial({ color: 0x00ff00 });
 
@@ -35,5 +40,5 @@ export function createScene1() {
         cube.rotation.y += 0.01;
     }
 
-  return scene;
+    return { scene, camera, animate: scene.animate };
 }

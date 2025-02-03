@@ -15,9 +15,10 @@ function findObjectByName(scene, name) {
 function init() {
 
   // Create camera, renderer, append to document
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  //const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.shadowMap.enabled = true; // Enable shadow mapping
   document.body.appendChild(renderer.domElement);
 
   // Create scenes and add to scene manager
@@ -27,18 +28,18 @@ function init() {
   // Load scene 1
   sceneManager.loadScene('scene1');
 
-  // set camera position
-  camera.position.z = 5;
 
   function animate() {
     requestAnimationFrame(animate);
     const currentScene = sceneManager.getCurrentScene();
-    // If current scene is not null
     if (currentScene) {
-      if (typeof currentScene.animate === 'function') {
-        currentScene.animate();
+      const currentCamera = currentScene.camera;
+      if (currentCamera) {
+        if (typeof currentScene.animate === 'function') {
+          currentScene.animate();
+        }
+        renderer.render(currentScene.scene, currentCamera);
       }
-      renderer.render(currentScene, camera);
     }
   }
 
@@ -47,9 +48,15 @@ function init() {
 
   // Handle window resize
   window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    const currentScene = sceneManager.getCurrentScene();
+    if (currentScene) {
+      const currentCamera = currentScene.camera;
+      if (currentCamera) {
+        currentCamera.aspect = window.innerWidth / window.innerHeight;
+        currentCamera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      }
+    }
   });
 }
 
