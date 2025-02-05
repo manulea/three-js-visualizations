@@ -5,7 +5,7 @@ import { createScene1 } from './scenes/scene1.js';
 import { createScene2 } from './scenes/scene2.js';
 import { createScene3 } from './scenes/scene3.js';
 import { createScene4 } from './scenes/scene4.js';
-
+import { createScene5 } from './scenes/scene5.js';
 
 const sceneManager = new SceneManager();
 
@@ -14,7 +14,6 @@ function findObjectByName(scene, name) {
 }
 
 function init() {
-
   // Create camera, renderer, append to document
   //const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer();
@@ -27,9 +26,10 @@ function init() {
   sceneManager.addScene('scene2', createScene2());
   sceneManager.addScene('scene3', createScene3());
   sceneManager.addScene('scene4', createScene4(renderer));
+  sceneManager.addScene('scene5', createScene5()); 
+
   // Load scene 1
   sceneManager.loadScene('scene1');
-
 
   function animate() {
     requestAnimationFrame(animate);
@@ -62,12 +62,12 @@ function init() {
   });
 }
 
-// Global function to load scene frome scene manager
+// Global function to load scene from scene manager
 window.loadScene = (sceneName) => {
   sceneManager.loadScene(sceneName);
-  console.log(sceneName + ' loaded')
-  console.log(sceneManager.getCurrentScene())
+  console.log(sceneName + ' loaded');
+  console.log(sceneManager.getCurrentScene());
 };
 
-// Initalize
+// Initialize
 init();
