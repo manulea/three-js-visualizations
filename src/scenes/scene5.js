@@ -51,4 +51,4 @@ export function createScene5() {
     };
 
     return { scene, camera, animate: scene.animate };
-  }
+}

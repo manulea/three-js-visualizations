@@ -1,0 +1,5 @@
+npm run dev
+node ws-server.js
+python mp3_beat_detector.py
+
+Open your application in the browser at http://localhost:5173.

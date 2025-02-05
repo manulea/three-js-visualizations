@@ -6,6 +6,8 @@ import { createScene2 } from './scenes/scene2.js';
 import { createScene3 } from './scenes/scene3.js';
 import { createScene4 } from './scenes/scene4.js';
 import { createScene5 } from './scenes/scene5.js';
+import { createScene6 } from './scenes/scene6.js';
+import { createScene7 } from './scenes/scene7.js';
 
 const sceneManager = new SceneManager();
 
@@ -14,21 +16,19 @@ function findObjectByName(scene, name) {
 }
 
 function init() {
-  // Create camera, renderer, append to document
-  //const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
   const renderer = new THREE.WebGLRenderer();
   renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.shadowMap.enabled = true; // Enable shadow mapping
+  renderer.shadowMap.enabled = true;
   document.body.appendChild(renderer.domElement);
 
-  // Create scenes and add to scene manager
   sceneManager.addScene('scene1', createScene1());
   sceneManager.addScene('scene2', createScene2());
   sceneManager.addScene('scene3', createScene3());
   sceneManager.addScene('scene4', createScene4(renderer));
-  sceneManager.addScene('scene5', createScene5()); 
+  sceneManager.addScene('scene5', createScene5());
+  sceneManager.addScene('scene6', createScene6());
+  sceneManager.addScene('scene7', createScene7());
 
-  // Load scene 1
   sceneManager.loadScene('scene1');
 
   function animate() {
@@ -45,10 +45,8 @@ function init() {
     }
   }
 
-  // Run animation
   animate();
 
-  // Handle window resize
   window.addEventListener('resize', () => {
     const currentScene = sceneManager.getCurrentScene();
     if (currentScene) {
@@ -62,11 +60,11 @@ function init() {
   });
 }
 
-// Global function to load scene from scene manager
 window.loadScene = (sceneName) => {
+  console.log('Loading scene:', sceneName);  // Debug log
   sceneManager.loadScene(sceneName);
-  console.log(sceneName + ' loaded');
-  console.log(sceneManager.getCurrentScene());
+  console.log(sceneName + ' loaded');  // Debug log
+  console.log(sceneManager.getCurrentScene());  // Debug log
 };
 
 // Initialize
